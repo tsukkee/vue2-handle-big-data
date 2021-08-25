@@ -12,17 +12,19 @@
       </label>
     </div>
 
-    <div v-for="d in convertedData" :key="d.id" class="data-view">
-      <span class="name">{{ d.name }} ({{ d.count }})</span>
-      <div class="tags">
-        <span
-          v-for="tag in d.tags"
-          :key="tag.name"
-          class="tag"
-          :class="{ selected: tag.selected }"
-        >
-          [ {{ tag.name }} ]
-        </span>
+    <div class="scroller">
+      <div v-for="d in convertedData" :key="d.id" class="data-view">
+        <span class="name">{{ d.name }} ({{ d.count }})</span>
+        <div class="tags">
+          <span
+            v-for="tag in d.tags"
+            :key="tag.name"
+            class="tag"
+            :class="{ selected: tag.selected }"
+          >
+            [ {{ tag.name }} ]
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -77,6 +79,10 @@ export default class DataView extends Vue {
 
 .tag-selector {
   margin: 20px 0;
+}
+
+.scroller {
+  overflow: auto;
 }
 
 .data-view {
