@@ -1,8 +1,7 @@
 srand(0)
 TAGS = ['hoge', 'fuga', 'piyo', 'foo', 'bar', 'baz']
 
-puts '{'
-0.upto(9999).each do |i|
+0.upto(19999).each do |i|
   puts <<EOS
   {
     id: #{i},
@@ -11,4 +10,3 @@ puts '{'
   },
 EOS
 end
-puts '}'
