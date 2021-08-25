@@ -6,7 +6,10 @@ TAGS = ['hoge', 'fuga', 'piyo', 'foo', 'bar', 'baz']
   {
     id: #{i},
     name: "data#{i}",
-    tags: [#{TAGS.sample(rand(TAGS.size)).map{|t| "\"#{t}\""}.join(', ')}],
+    options: {
+      tags: [#{TAGS.sample(rand(TAGS.size)).map{|t| "\"#{t}\""}.join(', ')}],
+      nickname: "DATA#{i}"
+    }
   },
 EOS
 end

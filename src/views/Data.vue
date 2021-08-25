@@ -11,7 +11,7 @@
     </div>
 
     <div v-for="d in convertedData" :key="d.id" class="data-view">
-      <span class="name">{{ d.name }}</span>
+      <span class="name">{{ d.name }} ({{ d.count }})</span>
       <div class="tags">
         <span
           v-for="tag in d.tags"
@@ -34,7 +34,7 @@ import { DataType, TagType, BIG_DATA, TAGS } from "../data/big-data";
   components: {},
 })
 export default class DataView extends Vue {
-  data: DataType[] = [];
+  data: readonly DataType[] = [];
 
   selectedTags: TagType[] = [];
 
@@ -46,7 +46,11 @@ export default class DataView extends Vue {
     return this.data.map((d) => ({
       id: d.id,
       name: d.name,
-      tags: d.tags.map((t) => ({
+      count: d.options.tags.reduce(
+        (sum, t) => sum + (this.selectedTags.includes(t) ? 1 : 0),
+        0
+      ),
+      tags: d.options.tags.map((t) => ({
         name: t,
         selected: this.selectedTags.includes(t),
       })),
@@ -54,7 +58,10 @@ export default class DataView extends Vue {
   }
 
   loadData(): void {
+    // BIG_DATA.forEach((d) => Object.freeze(d));
+    // this.data = Object.freeze(BIG_DATA);
     this.data = BIG_DATA;
+    console.log("big data", this.data);
   }
 }
 </script>
@@ -70,6 +77,7 @@ export default class DataView extends Vue {
 
   .name {
     width: 180px;
+    text-align: left;
   }
 
   .tags {
