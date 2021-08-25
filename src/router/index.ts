@@ -1,30 +1,28 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/Home.vue";
-import DataView from "../views/Data.vue";
+import DataInit from "../views/DataInit.vue";
+import DataVirtualScroll from "../views/DataVirtualScroll.vue";
+import DataObjectFreeze from "../views/DataObjectFreeze.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "/init",
+    name: "DataInit",
+    component: DataInit,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/virtualscroll",
+    name: "DataVirtualScroll",
+    component: DataVirtualScroll,
   },
   {
-    path: "/data",
-    name: "Data",
-    component: DataView,
+    path: "/objectfreeze",
+    name: "DataObjectFreeze",
+    component: DataObjectFreeze,
   },
+  { path: "*", redirect: "/init" },
 ];
 
 const router = new VueRouter({

@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <div class="header">
-      <h1>Data</h1>
+      <h1>初期状態</h1>
       <button @click="loadData">データロード</button>
     </div>
 
@@ -12,29 +12,6 @@
       </label>
     </div>
 
-    <RecycleScroller
-      class="scroller"
-      :items="convertedData"
-      :item-size="32"
-      key-field="id"
-      v-slot="{ item }"
-    >
-      <div class="data-view">
-        <span class="name">{{ item.name }} ({{ item.count }})</span>
-        <div class="tags">
-          <span
-            v-for="tag in item.tags"
-            :key="tag.name"
-            class="tag"
-            :class="{ selected: tag.selected }"
-          >
-            [ {{ tag.name }} ]
-          </span>
-        </div>
-      </div>
-    </RecycleScroller>
-
-    <!--
     <div v-for="d in convertedData" :key="d.id" class="data-view">
       <span class="name">{{ d.name }} ({{ d.count }})</span>
       <div class="tags">
@@ -48,7 +25,6 @@
         </span>
       </div>
     </div>
-    -->
   </div>
 </template>
 
@@ -65,7 +41,7 @@ export default class DataView extends Vue {
   selectedTags: TagType[] = [];
 
   get tags() {
-    return TAGS;
+    return TAGS.slice().sort();
   }
 
   get convertedData() {
@@ -76,16 +52,16 @@ export default class DataView extends Vue {
         (sum, t) => sum + (this.selectedTags.includes(t) ? 1 : 0),
         0
       ),
-      tags: d.options.tags.map((t) => ({
-        name: t,
-        selected: this.selectedTags.includes(t),
-      })),
+      tags: d.options.tags
+        .map((t) => ({
+          name: t,
+          selected: this.selectedTags.includes(t),
+        }))
+        .sort((a, b) => (a.name < b.name ? -1 : 1)),
     }));
   }
 
   loadData(): void {
-    // BIG_DATA.forEach((d) => Object.freeze(d));
-    // this.data = Object.freeze(BIG_DATA);
     this.data = BIG_DATA;
     console.log("big data", this.data);
   }

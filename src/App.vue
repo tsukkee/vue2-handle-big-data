@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/data">Data</router-link>
+      <router-link to="/init">初期状態</router-link> |
+      <router-link to="/virtualscroll">Virtual Scroll</router-link> |
+      <router-link to="/objectfreeze">Object.freeze()</router-link>
     </div>
     <router-view />
   </div>
