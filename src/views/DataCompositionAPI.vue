@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <div class="header">
-      <h1>Object.freeze()導入</h1>
+      <h1>Composition API + shallowRef</h1>
       <button @click="loadData">データロード</button>
     </div>
 
