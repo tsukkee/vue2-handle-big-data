@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/init">初期状態</router-link> |
       <router-link to="/virtualscroll">Virtual Scroll</router-link> |
-      <router-link to="/objectfreeze">Object.freeze()</router-link>
+      <router-link to="/objectfreeze">Object.freeze()</router-link> |
+      <router-link to="/compositionapi">Composition API</router-link>
     </div>
     <router-view />
   </div>

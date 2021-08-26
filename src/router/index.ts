@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import DataInit from "../views/DataInit.vue";
 import DataVirtualScroll from "../views/DataVirtualScroll.vue";
 import DataObjectFreeze from "../views/DataObjectFreeze.vue";
+import DataCompositionAPI from "../views/DataCompositionAPI.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes: Array<RouteConfig> = [
     path: "/objectfreeze",
     name: "DataObjectFreeze",
     component: DataObjectFreeze,
+  },
+  {
+    path: "/compositionapi",
+    name: "DataCompositionAPI",
+    component: DataCompositionAPI,
   },
   { path: "*", redirect: "/init" },
 ];

@@ -39,43 +39,52 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {
+  defineComponent,
+  shallowRef,
+  ref,
+  computed,
+} from "@vue/composition-api";
 import { DataType, TagType, BIG_DATA, TAGS } from "../data/big-data";
 
-@Component({
-  components: {},
-})
-export default class DataView extends Vue {
-  data: readonly DataType[] = [];
+export default defineComponent({
+  setup() {
+    const data = shallowRef<DataType[]>([]);
+    const selectedTags = ref<TagType[]>([]);
 
-  selectedTags: TagType[] = [];
+    const tags = computed(() => TAGS.slice().sort());
 
-  get tags() {
-    return TAGS.slice().sort();
-  }
+    const convertedData = computed(() => {
+      return data.value.map((d) => ({
+        id: d.id,
+        name: d.name,
+        count: d.options.tags.reduce(
+          (sum, t) => sum + (selectedTags.value.includes(t) ? 1 : 0),
+          0
+        ),
+        tags: d.options.tags
+          .map((t) => ({
+            name: t,
+            selected: selectedTags.value.includes(t),
+          }))
+          .sort((a, b) => (a.name < b.name ? -1 : 1)),
+      }));
+    });
 
-  get convertedData() {
-    return this.data.map((d) => ({
-      id: d.id,
-      name: d.name,
-      count: d.options.tags.reduce(
-        (sum, t) => sum + (this.selectedTags.includes(t) ? 1 : 0),
-        0
-      ),
-      tags: d.options.tags
-        .map((t) => ({
-          name: t,
-          selected: this.selectedTags.includes(t),
-        }))
-        .sort((a, b) => (a.name < b.name ? -1 : 1)),
-    }));
-  }
+    const loadData = () => {
+      data.value = BIG_DATA;
+      console.log("big data", data.value);
+    };
 
-  loadData(): void {
-    this.data = Object.freeze(BIG_DATA);
-    console.log("big data", this.data);
-  }
-}
+    return {
+      data,
+      selectedTags,
+      tags,
+      convertedData,
+      loadData,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
