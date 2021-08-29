@@ -106,7 +106,7 @@ export default defineComponent({
   margin: 0 40px;
 
   .name {
-    width: 180px;
+    width: 300px;
     text-align: left;
     margin-right: auto;
   }
