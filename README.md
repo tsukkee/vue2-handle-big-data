@@ -1,4 +1,4 @@
-# vue2-handle-big-data
+# [Node学園 37時限目 Vue 2で大きなデータを扱うときの性能改善手法](https://nodejs.connpass.com/event/221358/)のサンプルアプリ
 
 ## Project setup
 ```
