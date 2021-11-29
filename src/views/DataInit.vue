@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <div class="header">
-      <h1>初期状態</h1>
+      <h1>初期状態 {{ dataModel.name }}</h1>
       <button @click="loadData">データロード</button>
     </div>
 
@@ -31,13 +31,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Inject } from "vue-property-decorator";
 import { DataType, TagType, BIG_DATA, TAGS } from "../data/big-data";
+import { DataModel, DataModelKey } from "../data/data-model";
 
 @Component({
   components: {},
 })
 export default class DataView extends Vue {
+  @Inject(DataModelKey)
+  dataModel: DataModel;
+
   data: readonly DataType[] = [];
 
   selectedTags: TagType[] = [];

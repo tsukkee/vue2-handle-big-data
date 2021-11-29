@@ -10,6 +10,19 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Provide, Vue } from "vue-property-decorator";
+import { DataModel, DataModelKey } from "./data/data-model";
+
+@Component({
+  components: {},
+})
+export default class DataView extends Vue {
+  @Provide(DataModelKey)
+  dataModel = new DataModel();
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
